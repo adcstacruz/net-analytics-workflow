@@ -1,17 +1,15 @@
-# Pi-graph
+# Workflow for iterative network analysis and modeling
 
-### **Workflow for iterative graph analysis and modeling**: 
-
-ML workflow focused on feature-engineering graph/network data for organized, iteration-friendly, and more collaborative network data analysis and modeling.
+ML workflow focused on feature-engineering network/graph data for organized and more collaborative analysis and modeling.
 
 # Problem statement
 
-**TL;DR**: Feature engineering is messy. Feature engineering network data might be messier. This work proposes an ML workflow which utilizes scikit-learn's [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) module and `Custom Transformers` to reduce human errors, enable collaboration, and ease code iterations during the feature engineering process. 
+**TL;DR**: Feature engineering is messy, and might be messier when analyzing network data. This work proposes a simple ML workflow which utilizes scikit-learn's [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) module and `Custom Transformers` to reduce human errors, enable collaboration, and ease code iterations during the feature engineering process. 
 
 **Context:**
-Collaborating with other people when buildng ML-solutions might be complicated, especially during the preprocessing and feature-engineering process. Rudimentary pipelines might be prone to error, time consuming, and difficult to deal with in a collaborate manner.
+Collaborating with other people when buildng ML-solutions might be complicated, especially during the preprocessing and feature-engineering stage. Rudimentary feature-engineering workflows might be prone to error, time consuming, and difficult to deal with in a collaborative manner.
 
-**Example:** Below is a code where we have 3 numerical features in `X_train`, where PCA is performed and the results were used as input for the model.
+**Example:** Below is a code (rudimentary base workflow) where we have numerical features in `X_train`, then PCA is performed and the results were used as input for the model.
 
 ```python
 # transform the data
@@ -29,7 +27,22 @@ y_test_pred = model.predict(X_test_pca)
 
 ```
 
-**Issues:** What if you have decided to perform normalization to specific columns? What if you want to acquired new categorical feature which you need to enode? What if I want to use SVM? Imagine the code changes in order to perform these. Imagine having have hundreds of data. Imagine having more complex data. This will be really messy code (been there). Lastly, how can you collaborate this with other people, if even you are having trouble modifying your code during the feature-engineering process. We need stucture. 
+- What if:
+    - you have decided to perform normalization to specific columns? 
+    - you want to include new categorical feature which you need to encode? 
+    - you want to explore other models? (some might require different preprocessing strats) 
+    - you want to tune the `n_components` hyper-param? 
+- Imagine: 
+    - the code changes in order to perform these.
+    - having hundreds of features requiring different transformations. 
+    - having more complex features. 
+- Issues:
+    - This will be a really messy code (been there). 
+    - Difficult to collaborate this with other people.
+    - Hard to keep track of the series and parallel transformations done to the raw data.
+    - Difficult to deploy and iterate models.
+    - Tedious feature engineering process.
+- What we need? **Structure** 
 
 **Proposed Solution:** To reduce these issues/complexities, this work proposes an initial workflow where different collaborators can just add different data transformation techniques in model building. In addition, this work will extend on model evaluation and feature analysis.
 
@@ -40,20 +53,41 @@ y_test_pred = model.predict(X_test_pca)
 
 # How to use?
 
-1. Install Anaconda
-2. Create an environment 
-3. Add kernel to the notebook
-4. Open the jupyter notebook under the `notebook` directory
+#### 1. Install [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
 
-* Create the environent - some graph-based feature extactors used have some issues in the new version of networkx
+#### 2. Create an environment 
+
+```
+$ conda create -f environment.yml
+```
+#### 3. Activate the environment
+
+```
+$ conda activate net_analytics_p36
+```
+
+#### 4. Add kernel to the notebook
+
+In order to use the environment that was just created, 
+```
+$ python -m ipykernel install --user --name=net_analytics_p36
+```
+
+
+#### 5. Deactivate environment. Then, open the jupyter notebook under the repo's `notebook` directory. Use the kernel name that was set earlier. 
+
+```
+$ conda deactivate
+$ jupyter notebook
+```
 
 
 # Current Workflow Components and Development Status
 
-- [ ] Feature engineering
-    - [x] basic column transformer for edges
-    - [x] basic column transformer for community based
-- [x] Basic model evaluation
+- [x] Initial feature engineering
+    - [x] basic transformer for edges
+    - [x] basic transformer for community based
+- [x] Initial model evaluation
 - [x] Model performance analysis
 - [ ] Instance analysis
 - [ ] Feature importance analysis
@@ -61,10 +95,14 @@ y_test_pred = model.predict(X_test_pca)
 Next steps:
 - Integration with GIS data
 - Include EDA and model analysis based on a use case
+- Tailor-fit to my own use case
+- Make this Google Colab compatible
 
 # Notes:
-- This is not intended to be a general workflow. 
-    - I am considering only a sample use case because it is quite similar to the problem that I will be solving where I'll follow this the proposed workflow/pipeline of this work.
-    - Current use case was based on an assignment in [Applied Social Network Analysis in Python](https://www.coursera.org/programs/department-of-science-and-technology-philippines-on-coursera-n6fc2?collectionId=&currentTab=MY_COURSES&productId=ZIVvfx00EeagBBLYvz0q6w&productType=course&showMiniModal=true)
-- The structure of the workflow in a single notebook for now, however, if I can see the need to improve the repo structure, this will be changed.
+- Motivation behind this: I might collaborate with some data scientists to solve a network/gis-based problem
+- This work is not intended to build a pipeline/workflow that can do everything. This is more of establishing a structure where people can extend the feature engineering, modeling, analysis, and eval strategies. 
+
+- Current notebook only considered one use case which was adopted from an assignment in [Applied Social Network Analysis in Python](https://www.coursera.org/programs/department-of-science-and-technology-philippines-on-coursera-n6fc2?collectionId=&currentTab=MY_COURSES&productId=ZIVvfx00EeagBBLYvz0q6w&productType=course&showMiniModal=true)
+
+- The structure of the workflow is in a single notebook for now; however, if I see the need to improve the repo structure, this will be changed.
 - I focused more on the feature engineering side, I think I need to further establish my use case to determine the EDA and model analysis that needs to be done. 
