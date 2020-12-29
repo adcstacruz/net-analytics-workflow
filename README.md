@@ -2,7 +2,7 @@
 
 ML workflow focused on feature-engineering network/graph data for organized and more collaborative analysis and modeling.
 
-# Problem statement
+## Problem statement
 
 **TL;DR**: Feature engineering is messy, and might be messier when analyzing network data. This work proposes a simple ML workflow which utilizes scikit-learn's [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) module and `Custom Transformers` to reduce human errors, enable collaboration, and ease code iterations during the feature engineering process. 
 
@@ -46,12 +46,12 @@ y_test_pred = model.predict(X_test_pca)
 
 **Proposed Solution:** To reduce these issues/complexities, this work proposes an initial workflow where different collaborators can just add different data transformation techniques in model building. In addition, this work will extend on model evaluation and feature analysis.
 
-# Main packages used
+## Main packages used
 * `networkx`:      feature extraction from network/graph data
 * `scikit-learn`:  custom transformers, modeling, and etc.
 * `shap`:          feature importance
 
-# How to use?
+## How to use?
 
 #### 1. Install [Anaconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/)
 
@@ -82,7 +82,7 @@ $ jupyter notebook
 ```
 
 
-# Current Workflow Components and Development Status
+## Current Workflow Components and Development Status
 
 - [x] Initial feature engineering
     - [x] basic transformer for edges
@@ -98,7 +98,7 @@ Next steps:
 - Tailor-fit to my own use case
 - Make this Google Colab compatible
 
-# Notes:
+## Notes:
 - Motivation behind this: I might collaborate with some data scientists to solve a network/gis-based problem
 - This work is not intended to build a pipeline/workflow that can do everything. This is more of establishing a structure where people can extend the feature engineering, modeling, analysis, and eval strategies. 
 
